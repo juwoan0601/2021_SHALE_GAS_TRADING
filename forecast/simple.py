@@ -8,4 +8,4 @@ def test_static(info)->float:
     return info["MD (All Wells) (ft)"]*10
 
 def test_serial(info)->float:
-    return info["GAS_MONTH_13"]
+    return info["GAS_MONTH_9"]

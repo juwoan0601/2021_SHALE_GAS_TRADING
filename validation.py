@@ -1,6 +1,6 @@
 ### SET FILE PATH
 TRUE_FILE_PATH = "./forecast/answer.csv"
-FAKE_FILE_PATH = "./submission_20211124024557.csv"
+FAKE_FILE_PATH = "./submission_20211124030126.csv"
 ### SET FILE PATH END
 
 from datetime import datetime
