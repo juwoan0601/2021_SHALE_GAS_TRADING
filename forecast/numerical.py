@@ -10,5 +10,7 @@ def predict_36month_from_first_6month(info)->float:
     return np.mean(serial[30:])
 
 def multi_regression(info)->float:
+    """ Multi regression Model with minitab
+    """
     value = -6120704+(1073*info['TVD (ft)'])+(2762194*info['Bot-Hole Northing (NAD83)'])+(29.4*info['Total Proppant Placed (tonne)'])-(17.6*info['Total Sand Proppant Placed (tonne)'])-(0.0465*info['TVD (ft)']*info['TVD (ft)'])-(147336*info['Bot-Hole Northing (NAD83)']*info['Bot-Hole Northing (NAD83)'])+(0.001349*info['Total Proppant Placed (tonne)']*info['Total Proppant Placed (tonne)'])-(248.3*info['TVD (ft)']*info['Bot-Hole Northing (NAD83)'])-(36.02*info['Bot-Hole Northing (NAD83)']*info['Total Sand Proppant Placed (tonne)'])
     return value
