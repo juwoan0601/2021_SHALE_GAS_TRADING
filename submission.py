@@ -60,5 +60,5 @@ if __name__ == "__main__":
             product_result_path=production_file_path,
             decision_result_path=decision_file_path,
             skip_decision=SKIP_DECISION)
-    print("Result file 1 : {0}".format(production_file_path))
-    print("Result file 2 : {0}".format(decision_file_path))
+    print("[SUBMISSION] Result file for Gas      : {0}".format(production_file_path))
+    print("[SUBMISSION] Result file for Decision : {0}".format(decision_file_path))
