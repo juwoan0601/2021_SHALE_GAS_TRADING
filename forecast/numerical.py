@@ -9,7 +9,7 @@ def predict_36month_from_first_6month(info)->float:
         serial[m] = avg_first_6m*C1*pow(math.e,C2*m)
     return np.mean(serial[30:])
 
-def multi_regression_last(info)->float: ## jeongwoo
+def multi_regression_last(info)->float: ## jeongwoo new
     """ Multi regression Model with minitab
     """
     value = -369503+(43.9*info['MD (All Wells) (ft)'])+(130.5*info['Avg Frac Spacing (m)'])+(20.32*info['Completed Length (m)'])-(781*info['Bot-Hole direction (N/S)/(E/W)'])-(0.001363*info['MD (All Wells) (ft)']*info['MD (All Wells) (ft)'])+(13.95*info['Avg Frac Spacing (m)']*info['Bot-Hole direction (N/S)/(E/W)'])
