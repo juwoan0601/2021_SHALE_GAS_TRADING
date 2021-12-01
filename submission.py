@@ -5,12 +5,12 @@ from forecast.numerical import multi_regression
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
 ### SET SUBMISSION START
-EXAM_FILE_PATH      = "D:/POSTECH/대외활동/2021 제1회 데이터사이언스경진대회/data/examSet.csv"
-TEST_FILE_PATH      = "D:/POSTECH/대외활동/2021 제1회 데이터사이언스경진대회/data/examSet.csv"
+EXAM_FILE_PATH      = "D:/examSet.csv"
+TEST_FILE_PATH      = "D:/trainSet.csv"
 RESULT_FILE_NAME    = "submission_train"
 STATIC_FUNCTION     = multi_regression
 SERIAL_FUNCTION     = predict_36month_from_first_6month
-SKIP_DECISION       = False
+SKIP_DECISION       = True
 DECISION_FUNCTION   = top # if you dont use decision function, set DECISION_FUNCTION = any
 COST_MAX            = 15000000
 ### SET SUBMISSION END

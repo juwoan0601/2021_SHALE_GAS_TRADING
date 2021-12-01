@@ -20,7 +20,6 @@ def top(info,price_max:float)->list:
     # Calculate profit
     for n in range(n_data):
         profit[n] = (6*product[n]*5-price[n]-cost[n])
-    print()
     # Make Decision    
     decision = np.zeros(n_data)
     index_sorted_ascending  = product.argsort() # 오름차순 정렬
@@ -54,7 +53,6 @@ def profit_top(info,price_max:float)->list:
     # Calculate profit
     for n in range(n_data):
         profit[n] = (6*product[n]*5-price[n]-cost[n])
-    print()
     # Make Decision    
     decision = np.zeros(n_data)
     index_sorted_ascending  = profit.argsort() # 오름차순 정렬
