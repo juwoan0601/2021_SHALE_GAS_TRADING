@@ -45,7 +45,7 @@ def Gradeint_Boost(info): #-> float:
     from sklearn.ensemble import GradientBoostingRegressor
     # Average CV score on the training set was: -679592002.095346
 
-    x = np.zeros(29)
+    x = np.zeros(22)
     y = np.zeros(1) #target first 6 month
 
     #for num in range(len(x)+1):
@@ -57,32 +57,32 @@ def Gradeint_Boost(info): #-> float:
     x[4] = info['Bot-Hole direction (N/S)/(E/W)']
     x[5] = info['Bot-Hole Easting (NAD83)']
     x[6] = info['Bot-Hole Northing (NAD83)']
-    x[7] = info['On Prod YYYY/MM/DD']
-    x[8] = info['First Prod YYYY/MM']
-    x[9] = info['Last Prod. YYYY/MM']
-    x[10] = info['Stimulation Fluid']
-    x[11] = info['Total Proppant Placed (tonne)']
-    x[12] = info['Avg Proppant Placed per Stage (tonne)']
-    x[13] = info['Total Fluid Pumped (m3)']
-    x[14] = info['Avg Fluid Pumped per Stage (m3)']
-    x[15] = info['Stages Actual']
-    x[16] = info['Completed Length (m)']
-    x[17] = info['Avg Frac Spacing (m)']
-    x[18] = info['Load Fluid Rec (m3)']
-    x[19] = info['Load Fluid (m3)']
-    x[20] = info['Avg Fluid Pumped / Meter (m3)']
-    x[21] = info['Avg Proppant Placed / Meter (tonne)']
-    x[22] = info['Proppant Composition']
-    x[23] = info['Proppant Name 1']
-    x[24] = info['Proppant Size 1']
-    x[25] = info['Avg Proppant 1 Placed (tonne)']
-    x[26] = info['Total Proppant 1 Placed (tonne)']
-    x[27] = info['Total Ceramic Proppant Placed (tonne)']
-    x[28] = info['Total Sand Proppant Placed (tonne)']
+    #x[7] = info['On Prod YYYY/MM/DD']
+    #x[8] = info['First Prod YYYY/MM']
+    #x[9] = info['Last Prod. YYYY/MM']
+    #x[7] = info['Stimulation Fluid']
+    x[7] = info['Total Proppant Placed (tonne)']
+    x[8] = info['Avg Proppant Placed per Stage (tonne)']
+    x[9] = info['Total Fluid Pumped (m3)']
+    x[10] = info['Avg Fluid Pumped per Stage (m3)']
+    x[11] = info['Stages Actual']
+    x[12] = info['Completed Length (m)']
+    x[13] = info['Avg Frac Spacing (m)']
+    x[14] = info['Load Fluid Rec (m3)']
+    x[15] = info['Load Fluid (m3)']
+    x[16] = info['Avg Fluid Pumped / Meter (m3)']
+    x[17] = info['Avg Proppant Placed / Meter (tonne)']
+    #x[18] = info['Proppant Composition']
+    #x[23] = info['Proppant Name 1']
+    #x[24] = info['Proppant Size 1']
+    x[18] = info['Avg Proppant 1 Placed (tonne)']
+    x[19] = info['Total Proppant 1 Placed (tonne)']
+    x[20] = info['Total Ceramic Proppant Placed (tonne)']
+    x[21] = info['Total Sand Proppant Placed (tonne)']
 
     y[0] = info['First 6 mo. Avg. GAS (Mcf)']
 
-    x = x.reshape(-1, 29)
+    x = x.reshape(-1, 22)
     #y = y.reshape(-1, 1)
 
     exported_pipeline = make_pipeline(
