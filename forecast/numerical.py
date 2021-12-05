@@ -1,3 +1,6 @@
+import pickle
+import numpy as np
+
 def predict_36month_from_first_6month(info)->float:
     import numpy as np
     import math
