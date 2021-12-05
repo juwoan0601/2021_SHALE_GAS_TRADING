@@ -45,11 +45,12 @@ def Gradeint_Boost(info): #-> float:
     from sklearn.ensemble import GradientBoostingRegressor
     # Average CV score on the training set was: -679592002.095346
 
+    filename = 'C:/Users/백다현/Gradient_boost.pkl' #
+    loaded_model = pickle.load(open(filename, 'rb'))
+
     x = np.zeros(22)
     y = np.zeros(1) #target first 6 month
 
-    #for num in range(len(x)+1):
-     #   x[num - 1] = info.iloc[:, num] #error: too many indexer
     x[0] = info['Reference (KB) Elev. (ft)']
     x[1] = info['Ground Elevation (ft)']
     x[2] = info['MD (All Wells) (ft)']
@@ -80,19 +81,7 @@ def Gradeint_Boost(info): #-> float:
     x[20] = info['Total Ceramic Proppant Placed (tonne)']
     x[21] = info['Total Sand Proppant Placed (tonne)']
 
-    y[0] = info['First 6 mo. Avg. GAS (Mcf)']
-
     x = x.reshape(-1, 22)
-    #y = y.reshape(-1, 1)
-
-    exported_pipeline = make_pipeline(
-        RobustScaler(),
-        VarianceThreshold(threshold=0.01),
-        GradientBoostingRegressor(alpha=0.9, learning_rate=0.5, loss="huber", max_depth=1, max_features=0.05,
-                                  min_samples_leaf=2, min_samples_split=3, n_estimators=100, subsample=1.0)
-    )
-
-    exported_pipeline.fit(x, y)
-    result = exported_pipeline.predict(x)
+    result = loaded_model.predict(x)
 
     return result
