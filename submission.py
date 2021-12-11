@@ -1,17 +1,17 @@
 ### IMPORT YOUR FORCAST FUNCTION
 from forecast.simple import test_serial, test_static
 from forecast.numerical import predict_36month_from_first_6month
-from forecast.numerical import multi_regression
+from forecast.numerical import multi_regression_first6
+from forecast.autoML import gradeint_boost_last6, gradeint_boost_last6_C23, random_forest, gradeint_boost
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
 ### SET SUBMISSION START
-EXAM_FILE_PATH      = "D:/examSet.csv"
-TEST_FILE_PATH      = "D:/trainSet.csv"
-RESULT_FILE_NAME    = "submission_train"
-STATIC_FUNCTION     = multi_regression
-SERIAL_FUNCTION     = predict_36month_from_first_6month
+EXAM_FILE_PATH      = r"D:\POSTECH\대외활동\2021 제1회 데이터사이언스경진대회\data\examSet.csv"
+RESULT_FILE_NAME    = "submission_train_gradientBoost"
+STATIC_FUNCTION     = gradeint_boost
+SERIAL_FUNCTION     = gradeint_boost_last6_C23
 SKIP_DECISION       = True
-DECISION_FUNCTION   = top # if you dont use decision function, set DECISION_FUNCTION = any
+DECISION_FUNCTION   = profit_top # if you dont use decision function, set DECISION_FUNCTION = any
 COST_MAX            = 15000000
 ### SET SUBMISSION END
 
@@ -53,7 +53,7 @@ if __name__ == "__main__":
                                             RESULT_FILE_NAME,
                                             datetime.now().strftime("%Y%m%d%H%M%S"))
     submission(
-            TEST_FILE_PATH,
+            EXAM_FILE_PATH,
             STATIC_FUNCTION,
             SERIAL_FUNCTION,
             DECISION_FUNCTION,
