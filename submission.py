@@ -2,11 +2,7 @@
 from forecast.simple import test_serial, test_static
 from forecast.numerical import predict_36month_from_first_6month
 from forecast.numerical import multi_regression
-<<<<<<< Updated upstream
 from forecast.autoML import gradeint_boost
-=======
-from forecast.numerical import Gradeint_Boost
->>>>>>> Stashed changes
 from forecast.numerical import random_forest
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
@@ -14,13 +10,8 @@ from decision.simple import top, random, profit_top
 EXAM_FILE_PATH      = "C:/Users/백다현/examSet.csv"
 TEST_FILE_PATH      = "C:/Users/백다현/trainSet.csv"
 RESULT_FILE_NAME    = "Gradeint_Boost"
-<<<<<<< Updated upstream
 STATIC_FUNCTION     = gradeint_boost #model 이거 바꿔야함
 SERIAL_FUNCTION     = gradeint_boost #predict_36month_from_first_6month
-=======
-STATIC_FUNCTION     = Gradeint_Boost #model 이거 바꿔야함
-SERIAL_FUNCTION     = Gradeint_Boost #predict_36month_from_first_6month
->>>>>>> Stashed changes
 SKIP_DECISION       = True
 DECISION_FUNCTION   = top # if you dont use decision function, set DECISION_FUNCTION = any
 COST_MAX            = 15000000
