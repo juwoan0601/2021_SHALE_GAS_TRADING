@@ -1,5 +1,8 @@
 ### SET FILE PATH
-TRUE_FILE_PATH = "./forecast/answer.csv"
+
+TRUE_FILE_PATH = "C:/Users/백다현\OneDrive - postech.ac.kr/문서/2021_SHALE_GAS_TRADING/forecast/answer.csv"
+FAKE_FILE_PATH = "C:/Users/백다현\OneDrive - postech.ac.kr/문서/2021_SHALE_GAS_TRADING/Gradeint_Boost_decision_20211205135921.csv"
+
 ### SET FILE PATH END
 from submission import submission
 ### IMPORT YOUR FORCAST FUNCTION
