@@ -1,6 +1,8 @@
 import pickle
 import numpy as np
 import copy
+
+from pandas.io.parsers import read_csv
 from preprocessing.new_column import avg_columns
 from preprocessing.seperate_feature_target import collective_columns, except_columns
 from config import ID_COLUMNS, SERIES_COLUMNS_GAS, STATIC_COLUMNS_WITHOUT_NAN, STATIC_COLUMNS_WITHOUT_NAN_ID
@@ -81,3 +83,32 @@ def load_molel_C23(info)->float:
     result = loaded_model.predict(x)
 
     return float(result)
+
+def gradeint_boost_first6_bulk(test_df):
+    # Average CV score on the training set was: -679592002.095346
+    MODEL_PATH = './saved_model/Gradient_boost_211205.pkl'
+    loaded_model = pickle.load(open(MODEL_PATH, 'rb'))
+
+    feature, target = collective_columns(
+        STATIC_COLUMNS_WITHOUT_NAN_ID, 
+        "No",
+        test_df)
+
+    result = loaded_model.predict(feature)
+
+    return result
+
+def gradeint_boost_last6_bulk(test_df):
+    # Average CV score on the training set was: -679592002.095346
+
+    MODEL_PATH = './saved_model/gradient_boost_last6_20211207002137.pkl'
+    loaded_model = pickle.load(open(MODEL_PATH, 'rb'))
+
+    feature, target = collective_columns(
+        STATIC_COLUMNS_WITHOUT_NAN_ID, 
+        "No",
+        test_df)
+
+    result = loaded_model.predict(feature)
+
+    return result

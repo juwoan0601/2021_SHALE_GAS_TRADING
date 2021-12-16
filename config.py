@@ -1,5 +1,6 @@
 TRAIN_DATASET_PATH          = "D:/POSTECH/대외활동/2021 제1회 데이터사이언스경진대회/data/trainSet.csv"
 TEST_DATASET_PATH           = "D:/POSTECH/대외활동/2021 제1회 데이터사이언스경진대회/data/examSet.csv"
+TRUE_PRODUCT_FILE_PATH = "D:/POSTECH/대외활동/2021 제1회 데이터사이언스경진대회/2021_SHALE_GAS_TRADING/forecast/answer.csv"
 TARGET_COLUMN_LAST_6_NAME   = 'Last 6 mo. Avg. GAS (Mcf)'
 TARGET_COLUMN_FIRST_6_NAME  = 'First 6 mo. Avg. GAS (Mcf)'
 PREDICT_COLUMN_NAME         = 'Pred 6 mo. Avg. GAS (Mcf)'
