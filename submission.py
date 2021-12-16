@@ -1,8 +1,14 @@
 ### IMPORT YOUR FORCAST FUNCTION
 from forecast.simple import test_serial, test_static
 from forecast.numerical import predict_36month_from_first_6month
+<<<<<<< HEAD
 from forecast.numerical import multi_regression_first6
 from forecast.autoML import gradeint_boost_last6, random_forest, gradeint_boost
+=======
+from forecast.numerical import multi_regression
+from forecast.autoML import gradeint_boost
+from forecast.numerical import random_forest
+>>>>>>> f763340e5b5bfab9809a1ea4b179cab2ab85d989
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
 from config import TRAIN_DATASET_PATH
@@ -12,7 +18,7 @@ RESULT_FILE_NAME    = "submission_train_gradientBoost"
 STATIC_FUNCTION     = gradeint_boost
 SERIAL_FUNCTION     = gradeint_boost_last6
 SKIP_DECISION       = True
-DECISION_FUNCTION   = profit_top # if you dont use decision function, set DECISION_FUNCTION = any
+DECISION_FUNCTION   = top # if you dont use decision function, set DECISION_FUNCTION = any
 COST_MAX            = 15000000
 ### SET SUBMISSION END
 
@@ -30,6 +36,7 @@ def submission(exam_path:str, func_static, func_serial, func_decision, product_r
     for num in range(n_exam):
         if pd.isna(df_exam.iloc[num]["GAS_MONTH_1"]):   # Use Static function
             result_data[num][0] = func_static(df_exam.iloc[num])
+            #print(df_exam.iloc[:,29])
         else:                                           # Use Serial function
             result_data[num][0] = func_serial(df_exam.iloc[num])
     df_exam["Pred 6 mo. Avg. GAS (Mcf)"] = result_data[:,0]
