@@ -3,18 +3,16 @@ TRUE_FILE_PATH = "./forecast/answer.csv"
 ### SET FILE PATH END
 from submission import submission
 ### IMPORT YOUR FORCAST FUNCTION
-from forecast.autoML import gradeint_boost_last6, gradeint_boost_last6_C23, random_forest, gradeint_boost
+from forecast.autoML import gradeint_boost_last6, gradeint_boost, load_molel_C23
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
+from config import TRAIN_DATASET_PATH, TEST_DATASET_PATH
 ### SET SUBMISSION START
-EXAM_FILE_PATH      = r"D:\POSTECH\대외활동\2021 제1회 데이터사이언스경진대회\data\examSet.csv"
-TEST_FILE_PATH      = r"D:\POSTECH\대외활동\2021 제1회 데이터사이언스경진대회\data\trainSet.csv"
+EXAM_FILE_PATH      = TEST_DATASET_PATH
+TEST_FILE_PATH      = TRAIN_DATASET_PATH
 RESULT_FILE_NAME    = "submission_train_gradientBoost"
 STATIC_FUNCTION     = gradeint_boost
-SERIAL_FUNCTION     = gradeint_boost_last6
-SKIP_DECISION       = True
-DECISION_FUNCTION   = profit_top # if you dont use decision function, set DECISION_FUNCTION = any
-COST_MAX            = 15000000
+SERIAL_FUNCTION     = load_molel_C23
 ### SET SUBMISSION END
 
 from datetime import datetime
@@ -52,8 +50,8 @@ if __name__ == "__main__":
             TEST_FILE_PATH,
             STATIC_FUNCTION,
             SERIAL_FUNCTION,
-            DECISION_FUNCTION,
+            any,
             product_result_path=production_file_path,
             decision_result_path=decision_file_path,
-            skip_decision=SKIP_DECISION)
+            skip_decision=True)
     compare_two_csv_files(TRUE_FILE_PATH,decision_file_path)

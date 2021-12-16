@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-from ..config import TRAIN_DATASET_PATH, NAN_COLUMNS
+from config import TRAIN_DATASET_PATH, NAN_COLUMNS
 
 TARGET_COLUMN = 'Last 6 mo. Avg. GAS (Mcf)'
 #RESULT_PATH = False

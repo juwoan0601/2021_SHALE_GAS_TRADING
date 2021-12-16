@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from config import COST_COLUMN_NAME, PREDICT_COLUMN_NAME, PRICE_COLUMN_NAME
+
 def random(cost,product,cost_max:float)->list:
     if not len(cost) == len(product):
         print("[ERROR] length of cost({0}) and product({1}) is not match.".format(len(cost), len(product)))
@@ -9,9 +11,9 @@ def random(cost,product,cost_max:float)->list:
 
 def top(info,price_max:float)->list:
     try:
-        price = info["PRICE ($)"].to_numpy()
-        product = info["Pred 6 mo. Avg. GAS (Mcf)"].to_numpy()
-        cost = info["Per Month Operation Cost ($)"].to_numpy()
+        price = info[PRICE_COLUMN_NAME].to_numpy()
+        product = info[PREDICT_COLUMN_NAME].to_numpy()
+        cost = info[COST_COLUMN_NAME].to_numpy()
     except KeyError as e:
         print("[ERROR] Key {0} is not exist in recived information.".format(e))
         return False
@@ -42,9 +44,9 @@ def top(info,price_max:float)->list:
 
 def profit_top(info,price_max:float)->list:
     try:
-        price = info["PRICE ($)"].to_numpy()
-        product = info["Pred 6 mo. Avg. GAS (Mcf)"].to_numpy()
-        cost = info["Per Month Operation Cost ($)"].to_numpy()
+        price = info[PRICE_COLUMN_NAME].to_numpy()
+        product = info[PREDICT_COLUMN_NAME].to_numpy()
+        cost = info[COST_COLUMN_NAME].to_numpy()
     except KeyError as e:
         print("[ERROR] Key {0} is not exist in recived information.".format(e))
         return False

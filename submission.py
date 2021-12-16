@@ -2,14 +2,15 @@
 from forecast.simple import test_serial, test_static
 from forecast.numerical import predict_36month_from_first_6month
 from forecast.numerical import multi_regression_first6
-from forecast.autoML import gradeint_boost_last6, gradeint_boost_last6_C23, random_forest, gradeint_boost
+from forecast.autoML import gradeint_boost_last6, random_forest, gradeint_boost
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
+from config import TRAIN_DATASET_PATH
 ### SET SUBMISSION START
-EXAM_FILE_PATH      = r"D:\POSTECH\대외활동\2021 제1회 데이터사이언스경진대회\data\examSet.csv"
+EXAM_FILE_PATH      = TRAIN_DATASET_PATH
 RESULT_FILE_NAME    = "submission_train_gradientBoost"
 STATIC_FUNCTION     = gradeint_boost
-SERIAL_FUNCTION     = gradeint_boost_last6_C23
+SERIAL_FUNCTION     = gradeint_boost_last6
 SKIP_DECISION       = True
 DECISION_FUNCTION   = profit_top # if you dont use decision function, set DECISION_FUNCTION = any
 COST_MAX            = 15000000
@@ -18,12 +19,11 @@ COST_MAX            = 15000000
 import numpy as np
 import pandas as pd
 from datetime import datetime
-df_exam = pd.read_csv(EXAM_FILE_PATH, index_col=0)
 
 def submission(exam_path:str, func_static, func_serial, func_decision, product_result_path="./gas.csv", decision_result_path="./decision.csv", skip_decision=False)->bool:
     """ function for make submission file (*.csv)
     """
-    df_exam = pd.read_csv(exam_path, index_col=0)
+    df_exam = pd.read_csv(exam_path)
     n_exam = len(df_exam)
     result_data = np.zeros((n_exam,2)) # Column: [avg gas production of 6 month, with or without selection]
     # Forecasting Gas production

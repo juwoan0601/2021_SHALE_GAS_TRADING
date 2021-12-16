@@ -335,4 +335,27 @@ ID_COLUMNS = [
     "No",
     "CPA Pretty Well ID"
 ]
-
+STATIC_COLUMNS_WITHOUT_NAN_ID = [
+    "Reference (KB) Elev. (ft)",
+    "Ground Elevation (ft)",
+    "MD (All Wells) (ft)",
+    "TVD (ft)",
+    "Bot-Hole direction (N/S)/(E/W)",
+    "Bot-Hole Easting (NAD83)",
+    "Bot-Hole Northing (NAD83)",
+    "Total Proppant Placed (tonne)",
+    "Avg Proppant Placed per Stage (tonne)",
+    "Total Fluid Pumped (m3)",
+    "Avg Fluid Pumped per Stage (m3)",
+    "Stages Actual",
+    "Completed Length (m)",
+    "Avg Frac Spacing (m)",
+    "Load Fluid Rec (m3)",
+    "Load Fluid (m3)",
+    'Avg Fluid Pumped / Meter (m3)',
+    'Avg Proppant Placed / Meter (tonne)',
+    'Avg Proppant 1 Placed (tonne)',
+    'Total Proppant 1 Placed (tonne)',
+    'Total Ceramic Proppant Placed (tonne)',
+    'Total Sand Proppant Placed (tonne)',
+]

@@ -12,7 +12,7 @@ def gradient_boost_first_6(feature,target,result=False):
     exported_pipeline = make_pipeline(
         RobustScaler(),
         VarianceThreshold(threshold=0.01),
-        GradientBoostingRegressor(alpha=0.9, learning_rate=0.5, loss="huber", max_depth=1, max_features=0.05, min_samples_leaf=2, min_samples_split=3, n_estimators=100, subsample=1.0)
+        GradientBoostingRegressor(alpha=0.9, learning_rate=0.5, loss="huber", max_depth=1, max_features=0.05, min_samples_leaf=2, min_samples_split=3, n_estimators=100, subsample=1.0, random_state=1)
     )
 
     exported_pipeline.fit(feature,target) #training_features, training_target
@@ -37,7 +37,7 @@ def gradient_boost_last_6(feature,target,result=False):
         StackingEstimator(estimator=GradientBoostingRegressor(alpha=0.75, learning_rate=0.01, loss="lad", max_depth=6, max_features=1.0, min_samples_leaf=8, min_samples_split=9, n_estimators=100, subsample=0.6500000000000001)),
         StackingEstimator(estimator=RidgeCV()),
         StackingEstimator(estimator=ElasticNetCV(l1_ratio=0.8, tol=0.001)),
-        AdaBoostRegressor(learning_rate=0.1, loss="linear", n_estimators=100)
+        AdaBoostRegressor(learning_rate=0.1, loss="linear", n_estimators=100, random_state=1)
     )
 
     exported_pipeline.fit(feature, target)

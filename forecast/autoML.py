@@ -1,8 +1,9 @@
 import pickle
 import numpy as np
 import copy
-from preprocessing.new_column import avg_columns, avg_columns_single_row
-from config import SERIES_COLUMNS_GAS
+from preprocessing.new_column import avg_columns
+from preprocessing.seperate_feature_target import collective_columns, except_columns
+from config import ID_COLUMNS, SERIES_COLUMNS_GAS, STATIC_COLUMNS_WITHOUT_NAN, STATIC_COLUMNS_WITHOUT_NAN_ID
 
 def random_forest(info)->float: #dahyeon
     MODEL_PATH = './saved_model/random_forest_211202.sav'
@@ -30,29 +31,8 @@ def gradeint_boost(info)-> float:
     loaded_model = pickle.load(open(MODEL_PATH, 'rb'))
 
     x = np.zeros(22)
-
-    x[0] = info['Reference (KB) Elev. (ft)']
-    x[1] = info['Ground Elevation (ft)']
-    x[2] = info['MD (All Wells) (ft)']
-    x[3] = info['TVD (ft)']
-    x[4] = info['Bot-Hole direction (N/S)/(E/W)']
-    x[5] = info['Bot-Hole Easting (NAD83)']
-    x[6] = info['Bot-Hole Northing (NAD83)']
-    x[7] = info['Total Proppant Placed (tonne)']
-    x[8] = info['Avg Proppant Placed per Stage (tonne)']
-    x[9] = info['Total Fluid Pumped (m3)']
-    x[10] = info['Avg Fluid Pumped per Stage (m3)']
-    x[11] = info['Stages Actual']
-    x[12] = info['Completed Length (m)']
-    x[13] = info['Avg Frac Spacing (m)']
-    x[14] = info['Load Fluid Rec (m3)']
-    x[15] = info['Load Fluid (m3)']
-    x[16] = info['Avg Fluid Pumped / Meter (m3)']
-    x[17] = info['Avg Proppant Placed / Meter (tonne)']
-    x[18] = info['Avg Proppant 1 Placed (tonne)']
-    x[19] = info['Total Proppant 1 Placed (tonne)']
-    x[20] = info['Total Ceramic Proppant Placed (tonne)']
-    x[21] = info['Total Sand Proppant Placed (tonne)']
+    for i in range(22):
+        x[i] = info[STATIC_COLUMNS_WITHOUT_NAN_ID[i]]
 
     x = x.reshape(-1, 22)
     result = loaded_model.predict(x)
@@ -66,68 +46,37 @@ def gradeint_boost_last6(info)-> float:
     loaded_model = pickle.load(open(MODEL_PATH, 'rb'))
 
     x = np.zeros(22)
-
-    x[0] = info['Reference (KB) Elev. (ft)']
-    x[1] = info['Ground Elevation (ft)']
-    x[2] = info['MD (All Wells) (ft)']
-    x[3] = info['TVD (ft)']
-    x[4] = info['Bot-Hole direction (N/S)/(E/W)']
-    x[5] = info['Bot-Hole Easting (NAD83)']
-    x[6] = info['Bot-Hole Northing (NAD83)']
-    x[7] = info['Total Proppant Placed (tonne)']
-    x[8] = info['Avg Proppant Placed per Stage (tonne)']
-    x[9] = info['Total Fluid Pumped (m3)']
-    x[10] = info['Avg Fluid Pumped per Stage (m3)']
-    x[11] = info['Stages Actual']
-    x[12] = info['Completed Length (m)']
-    x[13] = info['Avg Frac Spacing (m)']
-    x[14] = info['Load Fluid Rec (m3)']
-    x[15] = info['Load Fluid (m3)']
-    x[16] = info['Avg Fluid Pumped / Meter (m3)']
-    x[17] = info['Avg Proppant Placed / Meter (tonne)']
-    x[18] = info['Avg Proppant 1 Placed (tonne)']
-    x[19] = info['Total Proppant 1 Placed (tonne)']
-    x[20] = info['Total Ceramic Proppant Placed (tonne)']
-    x[21] = info['Total Sand Proppant Placed (tonne)']
+    for i in range(22):
+        x[i] = info[STATIC_COLUMNS_WITHOUT_NAN_ID[i]]
 
     x = x.reshape(-1, 22)
     result = loaded_model.predict(x)
 
     return float(result)
 
-def gradeint_boost_last6_C23(info)-> float:
-    # Average CV score on the training set was: -679592002.095346
-
-    MODEL_PATH = r'D:\POSTECH\대외활동\2021 제1회 데이터사이언스경진대회\2021_SHALE_GAS_TRADING\gradient_boost_last_6_17.03.pkl'
+def load_model_C22(info)->float:
+    MODEL_PATH = r"D:\POSTECH\대외활동\2021 제1회 데이터사이언스경진대회\2021_SHALE_GAS_TRADING\gradient_boost_first_6_24.37.pkl"
     loaded_model = pickle.load(open(MODEL_PATH, 'rb'))
-    info = copy.deepcopy(avg_columns_single_row(SERIES_COLUMNS_GAS[:30],"First 30 mo. Avg. GAS (Mcf)",info))
-    
+
+    x = np.zeros(22)
+    for i in range(22):
+        x[i] = info[STATIC_COLUMNS_WITHOUT_NAN_ID[i]]
+    x = x.reshape(-1, 22)
+    result = loaded_model.predict(x)
+
+    return float(result)
+
+def load_molel_C23(info)->float:
+    MODEL_PATH = r"D:\POSTECH\대외활동\2021 제1회 데이터사이언스경진대회\2021_SHALE_GAS_TRADING\gradient_boost_last_6_17.61.pkl"
+    loaded_model = pickle.load(open(MODEL_PATH, 'rb'))
+
+    # preprocessing
+    pros_info =  copy.deepcopy(avg_columns(SERIES_COLUMNS_GAS[:30],"First 30 mo. Avg. GAS (Mcf)",info))
+    used_columns = STATIC_COLUMNS_WITHOUT_NAN_ID + ["First 30 mo. Avg. GAS (Mcf)"]
+
     x = np.zeros(23)
-
-    x[0] = info['Reference (KB) Elev. (ft)']
-    x[1] = info['Ground Elevation (ft)']
-    x[2] = info['MD (All Wells) (ft)']
-    x[3] = info['TVD (ft)']
-    x[4] = info['Bot-Hole direction (N/S)/(E/W)']
-    x[5] = info['Bot-Hole Easting (NAD83)']
-    x[6] = info['Bot-Hole Northing (NAD83)']
-    x[7] = info['Total Proppant Placed (tonne)']
-    x[8] = info['Avg Proppant Placed per Stage (tonne)']
-    x[9] = info['Total Fluid Pumped (m3)']
-    x[10] = info['Avg Fluid Pumped per Stage (m3)']
-    x[11] = info['Stages Actual']
-    x[12] = info['Completed Length (m)']
-    x[13] = info['Avg Frac Spacing (m)']
-    x[14] = info['Load Fluid Rec (m3)']
-    x[15] = info['Load Fluid (m3)']
-    x[16] = info['Avg Fluid Pumped / Meter (m3)']
-    x[17] = info['Avg Proppant Placed / Meter (tonne)']
-    x[18] = info['Avg Proppant 1 Placed (tonne)']
-    x[19] = info['Total Proppant 1 Placed (tonne)']
-    x[20] = info['Total Ceramic Proppant Placed (tonne)']
-    x[21] = info['Total Sand Proppant Placed (tonne)']
-    x[22] = info['First 30 mo. Avg. GAS (Mcf)']
-
+    for i in range(23):
+        x[i] = pros_info[used_columns[i]]
     x = x.reshape(-1, 23)
     result = loaded_model.predict(x)
 

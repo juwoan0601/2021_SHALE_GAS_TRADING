@@ -23,5 +23,8 @@ def collective_columns(feature_columns_list:list, target_column:str, df:pd.DataF
 
 def except_columns(target:list, exception:list)-> list:
     for e in exception:
-        target.remove(e)
+        try: 
+            target.remove(e)
+        except ValueError as err:
+            print("{0} is Not exist. {1}".format(e,err))
     return target
