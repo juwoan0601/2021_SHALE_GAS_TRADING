@@ -1,14 +1,8 @@
 ### IMPORT YOUR FORCAST FUNCTION
 from forecast.simple import test_serial, test_static
 from forecast.numerical import predict_36month_from_first_6month
-<<<<<<< HEAD
 from forecast.numerical import multi_regression_first6
 from forecast.autoML import gradeint_boost_last6, random_forest, gradeint_boost
-=======
-from forecast.numerical import multi_regression
-from forecast.autoML import gradeint_boost
-from forecast.numerical import random_forest
->>>>>>> f763340e5b5bfab9809a1ea4b179cab2ab85d989
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
 from config import TRAIN_DATASET_PATH
