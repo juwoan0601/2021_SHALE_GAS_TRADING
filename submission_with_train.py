@@ -1,17 +1,19 @@
+## NOW BEST: first-gradeint_boost_first6_bulk(9.2%) / last-ada_boost_last6_train_all(16.8%)
+
 ### IMPORT YOUR FORCAST FUNCTION
-from forecast.autoML_train import ada_boost_last6_train_exp
-from forecast.autoML_train import gradeint_boost_first6_train
-from forecast.autoML import gradeint_boost_first6_bulk
+import forecast.autoML as ML
+import forecast.autoML_train as MLT
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
+from decision.dynamic_programming import dynamic_programming_back_tracking, dynamic_programming
 from config import TEST_DATASET_PATH
 ### SET SUBMISSION START
 EXAM_FILE_PATH      = TEST_DATASET_PATH
 RESULT_FILE_NAME    = "submission_train"
-STATIC_FUNCTION     = gradeint_boost_first6_bulk
-SERIAL_FUNCTION     = ada_boost_last6_train_exp
-SKIP_DECISION       = True
-DECISION_FUNCTION   = top # if you dont use decision function, set DECISION_FUNCTION = any
+STATIC_FUNCTION     = ML.gradeint_boost_first6_bulk
+SERIAL_FUNCTION     = MLT.ada_boost_last6_train_all
+SKIP_DECISION       = False
+DECISION_FUNCTION   = dynamic_programming_back_tracking # if you dont use decision function, set DECISION_FUNCTION = any
 COST_MAX            = 15000000
 ### SET SUBMISSION END
 
@@ -40,10 +42,11 @@ def submission(exam_path:str, func_static, func_serial, func_decision, product_r
         result_data[num+n_static][0] = product_serial[num]
     df_exam["Pred 6 mo. Avg. GAS (Mcf)"] = result_data[:,0]
     df_exam.to_csv(product_result_path)
-    # Make decision 
+    # Make decision
     if skip_decision:
         for num in range(n_exam): result_data[num][1] = 0
     else:
+        dynamic_programming(df_exam,COST_MAX)
         decision_data = func_decision(df_exam,COST_MAX)
         for num in range(n_exam):
             result_data[num][1] = decision_data[num]

@@ -130,5 +130,4 @@ def brute_force(info,price_max:float,max_trial=100)->list:
     print("Total Price  : {0}/{1} - {2} %".format(final_price,price_max,round((final_price/price_max)*100,2)))
     print("Total Product: {0}".format(final_product))
     print("Total Profit : {0}".format(final_profit))
-    return decision   
-    
+    return decision

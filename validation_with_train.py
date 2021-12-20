@@ -1,8 +1,10 @@
+## NOW BEST: first-gradeint_boost_first6_bulk(9.2%) / last-ada_boost_last6_train_all(16.8%)
+
 ### SET FILE PATH END
 from submission_with_train import submission
 ### IMPORT YOUR FORCAST FUNCTION
-from forecast.autoML_train import ada_boost_last6_train, gradeint_boost_first6_train, ada_boost_last6_train_exp, random_forest_first6_train, random_forest_last6_train, random_forest_last6_train_exp
-from forecast.autoML import gradeint_boost_first6_bulk, gradeint_boost_last6_bulk
+import forecast.autoML as ML
+import forecast.autoML_train as MLT
 ### IMPORT YOUR DECISION FUNCTION
 from decision.simple import top, random, profit_top
 from config import TRAIN_DATASET_PATH, TEST_DATASET_PATH, TRUE_PRODUCT_FILE_PATH
@@ -10,9 +12,9 @@ from config import TRAIN_DATASET_PATH, TEST_DATASET_PATH, TRUE_PRODUCT_FILE_PATH
 EXAM_FILE_PATH      = TEST_DATASET_PATH
 TEST_FILE_PATH      = TRAIN_DATASET_PATH
 TRUE_FILE_PATH      = TRUE_PRODUCT_FILE_PATH
-RESULT_FILE_NAME    = "submission_with_train"
-STATIC_FUNCTION     = gradeint_boost_first6_bulk
-SERIAL_FUNCTION     = ada_boost_last6_train_exp
+RESULT_FILE_NAME    = "validation_with_train"
+STATIC_FUNCTION     = ML.gradeint_boost_first6_bulk
+SERIAL_FUNCTION     = MLT.ada_boost_last6_train_all
 ### SET SUBMISSION END
 
 from datetime import datetime
@@ -34,9 +36,18 @@ def compare_two_csv_files(file1:str, file2:str, sep=48):
     print("- Time Stamp  : {0}".format(date_time))
     print("- Actual file : {0}".format(file1))
     print("- Fake   file : {0}".format(file2))
-    print("- sMAPE       : {0} %".format(sMAPE(actual_value,fake_value)))
-    print("--    Static  : {0} %".format(sMAPE_static(actual_value,fake_value,sep)))
-    print("--    Serial  : {0} %".format(sMAPE_serial(actual_value,fake_value,sep)))
+    try:
+        print("- sMAPE       : {0} %".format(sMAPE(actual_value,fake_value)))
+    except ValueError as e:
+        print("- sMAPE       : [ERROR] {0} %".format(e))
+    try:
+        print("--    Static  : {0} %".format(sMAPE_static(actual_value,fake_value,sep)))
+    except ValueError as e:
+        print("--    Static  : {0} %".format(e))
+    try:
+        print("--    Serial  : {0} %".format(sMAPE_serial(actual_value,fake_value,sep)))
+    except ValueError as e:
+        print("--    Serial  : {0} %".format(e))
     print("***** Calculate sMAPE END *****")
 
 if __name__ == "__main__":

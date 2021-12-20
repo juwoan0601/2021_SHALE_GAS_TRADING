@@ -4,6 +4,9 @@ import pickle
 from datetime import datetime
 from sklearn.pipeline import make_pipeline
 
+def smape(a, f):
+    return 1/len(a) * np.sum(2 * np.abs(f-a) / (np.abs(a) + np.abs(f))*100)
+
 def ada_boost_last_6(feature,target,result=False):
     from sklearn.ensemble import AdaBoostRegressor, GradientBoostingRegressor
     from sklearn.linear_model import ElasticNetCV, RidgeCV
@@ -19,13 +22,21 @@ def ada_boost_last_6(feature,target,result=False):
     exported_pipeline.fit(feature, target)
     results = exported_pipeline.predict(feature)
 
-    def smape(a, f):
-        return 1/len(a) * np.sum(2 * np.abs(f-a) / (np.abs(a) + np.abs(f))*100)
-
     err = smape(target, results)
     print("sMAPE: {0} %".format(err))
 
     # Save Model
     if result:
         pickle.dump(exported_pipeline, open("./gradient_boost_last_6_{0}.pkl".format(round(err,2)), 'wb')) #dump해야 모델 전체가 저장됨
-        
+
+def ada_boost_simple(feature,target,result=False):
+    from sklearn.ensemble import AdaBoostRegressor
+    # Create adaboost classifer object
+    abc_model = AdaBoostRegressor(n_estimators=50, learning_rate=0.1)
+
+    # Train Adaboost Classifer
+    abc_model.fit(feature, target)
+    results = abc_model.predict(feature)
+
+    err = smape(target, results)
+    print("sMAPE: {0} %".format(err))
